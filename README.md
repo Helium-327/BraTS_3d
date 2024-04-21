@@ -9,27 +9,29 @@
 
 ## DATASETS
 ### BraTS21
-> 下载地址：
-数据元信息
+#### 下载地址：
+
+#### 数据元信息
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/a8801cbd-13c1-4c74-a103-b3a4610adf75)
 
-图像尺寸
+#### 图像尺寸
+
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/0cab5c3f-9eeb-4549-99e0-19c25773b6fa)
 
-标签信息
+#### 标签信息
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/acce409b-c043-46e8-8556-8da09f2bfb17)
 
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/561e828b-3b32-418b-8708-91fc5fe8ae31)
 
-一、数据描述
-BraTS每个病例包含四个模态的磁共振成像（Magnetic Resonance Imaging，MRI），每个模态的维度为240×240×155（L×W×H）
+#### 数据描述
+> BraTS每个病例包含四个模态的磁共振成像（Magnetic Resonance Imaging，MRI），每个模态的维度为240×240×155（L×W×H）
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/98d0305e-ddd7-481b-ab5d-6c41d40a8964)
 
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/65c92764-89ab-4d08-8fee-f4bd7d6b7039)
 
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/3ce7e8d1-1e69-44eb-bcc8-d5d1e840785d)
 
-四种模态
+#### 四种模态
 1. T1
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/7d89f050-ebe2-48d6-b1f4-61d350d290ea)
 
