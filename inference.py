@@ -1,11 +1,11 @@
-""""
-Anchor: 
-    Xiong Junyin
-Name: 
-    inference.py
-Function：
-    对模型进行滑窗推理
-"""
+'''
+# -*- coding: UTF-8 -*-
+    @Description:        滑窗推理
+    @Author:             Junyin Xiong
+    @Date:               2024/04/21
+    @LastEditTime:       2024/04/21 19:08:34
+    @LastEditors:        Junyin Xiong
+'''
 
 import torch
 from monai.inferers import sliding_window_inference

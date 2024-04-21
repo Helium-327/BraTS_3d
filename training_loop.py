@@ -1,3 +1,28 @@
+'''
+# -*- coding: UTF-8 -*-
+    @Description:        实现一个epoch的训练过程
+                        1. 将模型设置为训练模式
+                        2. 遍历数据集
+                            2.1 计算当前batch的loss
+                            2.2 反向传播
+                            2.3 更新模型参数
+                            2.4 累加每个epoch的总损失
+                            2.5 打印每一步的提示
+                            2.6 更新学习率
+                            2.7 更新缩放器的内部状态
+                            2.8 更新每个epoch的平均loss
+                            2.9 记录每个epoch的平均loss
+                        3. 计算每个epoch的总损失，用以计算平均损失
+                        4. 更新学习率
+                        5. 打印每个epoch的平均loss
+                        6. 记录每个epoch的平均loss
+                        7. 返回每个epoch的平均loss
+    @Author:             Junyin Xiong
+    @Date:               2024/04/21
+    @LastEditTime:       2024/04/21 18:59:33
+    @LastEditors:        Junyin Xiong
+'''
+
 from torch.utils.tensorboard import SummaryWriter
 import time
 import torch
@@ -5,23 +30,6 @@ from tqdm import tqdm
 
 def training_loop(model, scaler, optimizer, loss_function, train_loader, device):
     """ 实现一个epoch的训练过程
-    1. 将模型设置为训练模式
-    2. 遍历数据集
-        2.1 计算当前batch的loss
-        2.2 反向传播
-        2.3 更新模型参数
-        2.4 累加每个epoch的总损失
-        2.5 打印每一步的提示
-        2.6 更新学习率
-        2.7 更新缩放器的内部状态
-        2.8 更新每个epoch的平均loss
-        2.9 记录每个epoch的平均loss
-    3. 计算每个epoch的总损失，用以计算平均损失
-    4. 更新学习率
-    5. 打印每个epoch的平均loss
-    6. 记录每个epoch的平均loss
-    7. 返回每个epoch的平均loss
-    
     Args:
         model: 训练使用的模型
         optimizer: 训练使用的优化器
@@ -54,7 +62,7 @@ def training_loop(model, scaler, optimizer, loss_function, train_loader, device)
     epoch_loss = 0
     step = 0
     
-    pbar = tqdm(train_loader)
+    pbar = tqdm(train_loader)  # TODO:卡在这一步
     
     for batch_data in pbar:
         # time.sleep(0.01)

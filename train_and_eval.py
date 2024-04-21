@@ -1,3 +1,12 @@
+'''
+# -*- coding: UTF-8 -*-
+    @Description:        训练与评估函数
+    @Author:             Junyin Xiong
+    @Date:               2024/04/21
+    @LastEditTime:       2024/04/21 18:56:36
+    @LastEditors:        Junyin Xiong
+'''
+
 import os 
 import time
 import torch

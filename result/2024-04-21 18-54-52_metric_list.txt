@@ -1,0 +1,18 @@
+{
+  "best_metric": 0.788521945476532,
+  "metric_values": [
+    0.788521945476532
+  ],
+  "metric_values_tc": [
+    0.7947168946266174
+  ],
+  "metric_values_wt": [
+    0.8613449931144714
+  ],
+  "metric_values_et": [
+    0.7095040082931519
+  ],
+  "train_epoch_loss_values": [
+    0.07477905601263046
+  ]
+}

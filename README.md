@@ -1,9 +1,14 @@
 # BraTS21 脑肿瘤分割任务
 ---
-```Text
-提交日志：
+```log
 - 2024-4-21
-    - 完成代码框架的转换，（.ipynb -> .py）
+    @change:      changed the code format from .ipynb to .py 
+    @Author:      Junyin Xiong
+    @plan:        add a new reading mode 
+- 2024/04/21 19:14:35
+    @change:      add a new mode to read a datasets from location path 
+    @Author:      Junyin Xiong
+    @plan:        
 
 ```
 

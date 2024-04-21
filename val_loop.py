@@ -1,10 +1,19 @@
+'''
+# -*- coding: UTF-8 -*-
+    @Description:        实现一个epoch的验证过程
+    @Author:             Junyin Xiong
+    @Date:               2024/04/21
+    @LastEditTime:       2024/04/21 19:20:32
+    @LastEditors:        Junyin Xiong
+'''
+
 from pyexpat import model
 import torch
 from tqdm import tqdm
 
-from monai.metrics import DiceMetric
+# from monai.metrics import DiceMetric
 from monai.data import decollate_batch
-from monai.losses import DiceCELoss
+# from monai.losses import DiceCELoss
 
 
 def val_loop(inference, post_trans, loss_function, dice_metric, dice_metric_batch, val_loader, device):

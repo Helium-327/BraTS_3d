@@ -1,53 +1,64 @@
 import os
+import torch
+import numpy as np
+import h5py
 from matplotlib import pyplot as plt
+from torch.utils.data import TensorDataset, DataLoader
+from torch.utils.data import Dataset
 
-from transforms import train_transforms, val_transforms, ConvertToMultiChannelBasedOnBratsClassesd
+from readDatasets.BraTS import BraTS
 
 
 from monai.utils import set_determinism
 from monai.apps import DecathlonDataset
-from monai.data import DataLoader, decollate_batch
-
-""" 设置随机种子 """
-set_determinism(seed=0)
-
-""" 载入本地数据集 """
-if os.path.exists('/mnt/g/DATASETS/'):
-    data_dir = '/mnt/g/DATASETS/BraTS21/BraTS2021_Training_Data'
-    train_txt = os.path.join(data_dir, 'train_list.txt')
-else:
-    data_dir = 'G:\\DATASETS\\BraTS21\\BraTS2021_Training_Data'
-    train_txt = os.path.join(data_dir, 'train_list.txt')
-
-""" 获取文件地址 """
-with open(train_txt, 'r') as f:
-    paths = [os.path.join(data_dir, line.strip()) for line in f] 
-
-# 获取数据集的类别名
-class_name = sorted(x for x in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, x)))
+# from monai.data import DataLoader, decollate_batch
 
 
-if os.path.exists('/mnt/g/DATASETS/'):
-    directory = '/mnt/g/DATASETS/'
-else:
-    directory = 'G:\\DATASETS\\'
+
+
+
+def get_dataset_from_location(h5_dir_path, train_txt_path, val_txt_path, tra_transforms=None, val_transforms=None):
+    """从本地读取数据
+    Args:
+        h5_dir_path (str): h5文件夹路径
+        train_txt_path (str): 训练集txt文件路径
+        val_txt_path (str): 验证集txt文件路径
+        transforms (torchvision.transforms.Compose, optional): 数据预处理操作. Defaults to None.
+        
+    Returns:    
+        train_loader (DataLoader): 训练集数据加载器
+        val_loader (DataLoader): 验证集数据加载器
     
-root_dir = directory
-
-
-def get_dataset_from_monai(root_dir, download=False):
-    """   """
-    
-    """ 定义数据增强 """
-    train_transform = train_transforms()
-    val_transform = val_transforms()
+    """
+    train_ds = BraTS(h5_dir_path, train_txt_path, transforms=tra_transforms)
+    val_ds = BraTS(h5_dir_path, val_txt_path, transforms=val_transforms)
     
     
-    """ 定义数据集 """
+    train_loader = DataLoader(train_ds, batch_size=1, shuffle=True)
+    val_loader = DataLoader(val_ds, batch_size=1, shuffle=False)
+    return train_loader, val_loader
+    
+    
+
+def get_dataset_from_monai(root_dir, download=False, tra_transfroms=None, val_transforms=None):
+    """使用monai框架读取数据集
+    
+    Args:
+        root_dir (str): 数据集根目录
+        download (bool, optional): 是否下载数据集. Defaults to False.
+        
+    Returns:
+        train_loader (DataLoader): 训练集数据加载器
+        val_loader (DataLoader): 验证集数据加载器
+    
+    """
+    
+    
+    # 定义数据集
     train_ds = DecathlonDataset(
     root_dir=root_dir,
     task="Task01_BrainTumour",
-    transform=train_transform,
+    transform=tra_transfroms,
     section="training",
     download=download,
     cache_rate=0.0,
@@ -57,7 +68,7 @@ def get_dataset_from_monai(root_dir, download=False):
     val_ds = DecathlonDataset(
         root_dir=root_dir,
         task="Task01_BrainTumour",
-        transform=val_transform,
+        transform=val_transforms,
         section="validation",
         download=False,
         cache_rate=0.0,
@@ -68,9 +79,6 @@ def get_dataset_from_monai(root_dir, download=False):
     val_loader = DataLoader(val_ds, batch_size=1, shuffle=False, num_workers=4)
     return train_loader, val_loader
 
-def get_dataset_from_location(root_dir):
-    # TODO : 从本地读取数据集
-    pass
 
 
 def visualize_dataset(datasets):
@@ -100,19 +108,50 @@ def visualize_dataset(datasets):
     plt.show()
 
 if __name__ == '__main__':
+    from transforms import train_transforms, val_transforms
+    
+    """ 设置随机种子 """
+    set_determinism(seed=0)
+
+    """ 载入本地数据集 """
+    if os.path.exists('/mnt/g/DATASETS/'):
+        data_dir = '/mnt/g/DATASETS/BraTS21/BraTS2021_Training_Data'
+        train_txt = os.path.join(data_dir, 'train_list.txt')
+    else:
+        data_dir = 'G:\\DATASETS\\BraTS21\\BraTS2021_Training_Data'
+        train_txt = os.path.join(data_dir, 'train_list.txt')
+
+    """ 获取文件地址 """
+    with open(train_txt, 'r') as f:
+        paths = [os.path.join(data_dir, line.strip()) for line in f] 
+
+    # 获取数据集的类别名
+    class_name = sorted(x for x in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, x)))
+
+
+    if os.path.exists('/mnt/g/DATASETS/'):
+        directory = '/mnt/g/DATASETS/'
+    else:
+        directory = 'G:\\DATASETS\\'
+        
+    root_dir = directory
+    
     train_loader, val_loader = get_dataset_from_monai(root_dir)
 
     
-    
-    import torch
-    from torch.utils.data import TensorDataset, DataLoader
+
 
     # 创建一个数据集
-    # data = [torch.randn(1, 4, 224, 224, 144) for i in range(10)]
-    # labels = [torch.randn(1, 4, 224, 224, 144) for i in range(10)]
-    # dataset = TensorDataset(data, labels)
-
-    # 创建一个DataLoader
-    # dataloader = DataLoader(dataset, batch_size=10, shuffle=True)
+    train_ds = DecathlonDataset(
+    root_dir=root_dir,
+    task="Task01_BrainTumour",
+    transform=train_transforms,
+    section="training",
+    download=False,
+    cache_rate=0.0,
+    num_workers=4, 
+    )
+    
+    ds = train_ds[0]
     
     

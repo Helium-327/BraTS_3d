@@ -1,16 +1,17 @@
 '''
 # -*- coding: UTF-8 -*-
-    @Description:        从Monai库中导入数据集时用到的预处理
+    @Description:        本地数据预处理
     @Author:             Junyin Xiong
     @Date:               2024/04/21
-    @LastEditTime:       2024/04/21 18:57:48
+    @LastEditTime:       2024/04/21 19:20:44
     @LastEditors:        Junyin Xiong
 '''
 
+
+import os
 import torch
 
 from monai.transforms import (
-    LoadImaged,
     EnsureChannelFirstd,
     EnsureTyped,
     Orientationd,
@@ -25,8 +26,6 @@ from monai.transforms import (
     Activations,
     AsDiscrete,
 )
-
-
 
 
 class ConvertToMultiChannelBasedOnBratsClassesd(MapTransform):
@@ -51,15 +50,10 @@ class ConvertToMultiChannelBasedOnBratsClassesd(MapTransform):
             result.append(d[key] == 2)
             d[key] = torch.stack(result, axis=0).float()
         return d
-    
-        
 
-def train_transforms():
+def tra_trans_location():
     return Compose([
-        # load 4 Nifti images and stack them together
-        LoadImaged(keys=["image", "label"]),
-        # make sure the channel dimension is in the first dimension
-        EnsureChannelFirstd(keys="image"),
+        # EnsureChannelFirstd(keys="image"),
         # convert the images to the correct data types
         EnsureTyped(keys=["image", "label"]),
         # convert the labels to multi-channel format
@@ -86,12 +80,10 @@ def train_transforms():
         # 随机强度偏移是通过在图像的每个像素上随机采样一个偏移量，然后将该像素的强度值加上这个偏移量来实现的。
         RandShiftIntensityd(keys="image", offsets=0.1, prob=1.0),
     ])
-
-def val_transforms():
+    
+def val_trans_location():
     return Compose([
-        LoadImaged(keys=["image", "label"]),
-        # make sure the channel dimension is in the first dimension
-        EnsureChannelFirstd(keys="image"),
+        # EnsureChannelFirstd(keys="image"),
         # convert the images to the correct data types
         EnsureTyped(keys=["image", "label"]),
         # convert the labels to multi-channel format
@@ -106,13 +98,4 @@ def val_transforms():
         ),
         # normalize the intensity of the images
         NormalizeIntensityd(keys="image", nonzero=True, channel_wise=True),
-    ]
-)
-    
-def post_trans():               # 后处理
-    return Compose([
-        Activations(sigmoid=True), AsDiscrete(threshold=0.5),
-])  
-    
-if __name__ == "__main__":
-    pass
+    ])

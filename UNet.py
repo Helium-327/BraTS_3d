@@ -1,3 +1,12 @@
+'''
+# -*- coding: UTF-8 -*-
+    @Description:        UNet3D网络模型
+    @Author:             Junyin Xiong
+    @Date:               2024/04/21
+    @LastEditTime:       2024/04/21 18:59:02
+    @LastEditors:        Junyin Xiong
+'''
+
 import torch
 import torch.nn as nn
 
