@@ -24,25 +24,12 @@
 ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/561e828b-3b32-418b-8708-91fc5fe8ae31)
 
 #### 数据描述
-> BraTS每个病例包含四个模态的磁共振成像（Magnetic Resonance Imaging，MRI），每个模态的维度为240×240×155（L×W×H）
-![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/98d0305e-ddd7-481b-ab5d-6c41d40a8964)
+> ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/5e7cefe9-50e7-4046-8a4e-3252a59e3d6e)
 
-![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/65c92764-89ab-4d08-8fee-f4bd7d6b7039)
-
-![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/3ce7e8d1-1e69-44eb-bcc8-d5d1e840785d)
 
 #### 四种模态
-1. T1
-> ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/7d89f050-ebe2-48d6-b1f4-61d350d290ea)
+> ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/7e872e46-aae7-4098-8d72-c5b6f41a9518)
 
-2. T1ce
-> ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/859a2dfd-d43f-4be2-9f0e-552311be982f)
-
-3. T2
-> ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/bba7c0de-e253-4584-bd3b-05b3fd40fb41)
-
-4. FLAIR
-> ![image](https://github.com/Helium-327/BraTS_3d/assets/48973653/6df59e21-c4e9-459d-8d22-bfd862fafabb)
 
 标签描述
 label 0：背景 (background)
